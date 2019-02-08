@@ -1,2 +1,2 @@
 # AntidetectFirefox
-Cource code of Firefox-based Antidetect browser
+Source code of Firefox-based Antidetect browser
