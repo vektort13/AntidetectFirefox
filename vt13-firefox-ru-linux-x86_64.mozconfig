@@ -1,0 +1,61 @@
+#
+. $topsrcdir/browser/config/mozconfig
+ac_add_options --disable-crashreporter
+ac_add_options --disable-libjpeg-turbo
+ac_add_options --disable-necko-wifi
+#ac_add_options --disable-strip
+ac_add_options --disable-tests
+#ac_add_options --disable-updater
+ac_add_options --enable-default-toolkit=cairo-gtk3
+ac_add_options --enable-extensions=default
+ac_add_options --enable-release
+ac_add_options --enable-safe-browsing
+ac_add_options --enable-startup-notification
+ac_add_options --libdir="$LIBDIR"
+ac_add_options --prefix="$PREFIX"
+#ac_add_options --with-mozilla-api-keyfile=../mozilla-api-key
+ac_add_options --without-system-libvpx
+ac_add_options --with-pthreads
+ac_add_options --with-system-zlib
+#ac_add_options --enable-system-hunspell
+ac_add_options --with-system-jpeg
+#export BUILD_OFFICIAL=1
+
+export MOZ_OPT_FLAGS="$MOZ_OPT_FLAGS -O2 -g -pipe  -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches   -m64 -mtune=generic -fpermissive -Wformat  -Wformat -Werror=format-security"
+export CFLAGS='-O2 -g -pipe  -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches   -m64 -mtune=generic -Wformat  -Wformat -Werror=format-security'
+export CXXFLAGS='-O2 -g -pipe  -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches   -m64 -mtune=generic -fpermissive -Wformat  -Wformat -Werror=format-security'
+export LDFLAGS='-Wl,--verbose '
+
+#export CFLAGS="$CFLAGS -gdwarf-2"
+#export CXXFLAGS="$CXXFLAGS -gdwarf-2"
+#export MOZILLA_OFFICIAL=1
+export MOZ_MAKE_FLAGS="-j10"
+
+mk_add_options MOZ_SERVICES_SYNC="1"
+
+mk_add_options MOZ_MAKE_FLAGS="$MOZ_MAKE_FLAGS"
+mk_add_options MOZ_OPT_FLAGS="$MOZ_OPT_FLAGS"
+mk_add_options CFLAGS="$CFLAGS"
+mk_add_options CXXFLAGS="$CXXFLAGS"
+mk_add_options LDFLAGS="$LDFLAGS"
+
+##mk_add_options MOZ_CO_LOCALES=ru
+ac_add_options --enable-ui-locale=ru
+ac_add_options --with-l10n-base=@TOPSRCDIR@/../l10n-release
+
+#mk_add_options BUILD_OFFICIAL=1
+#mk_add_options MOZILLA_OFFICIAL=1
+mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/../objdirs/$(basename $topsrcdir)
+#ac_add_options --enable-official-branding
+ac_add_options --enable-default-toolkit=cairo-gtk3
+#ac_add_options --disable-system-sqlite
+#ac_add_options --with-system-nspr
+#ac_add_options --with-system-nss
+ac_add_options --enable-startup-notification
+ac_add_options --enable-jemalloc
+ac_add_options --disable-debug
+ac_add_options --enable-optimize
+ac_add_options --with-intl-api
+
+ac_add_options --with-branding=browser/branding/vektor_t13
+ac_add_options --with-distribution-id=com.vektort13

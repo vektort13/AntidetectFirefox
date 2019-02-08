@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://browser/skin/preferences/preferences.css" type="text/css"?>
+
+<window id="UseragentsDialog" windowtype="Browser:UserAgents"
+        class="windowDialog" title="UserAgent templates"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        style="width: 400;"
+        onload="gUserAgentsWindow.onLoad();"
+        onunload="gUserAgentsWindow.uninit();"
+        persist="screenX screenY width height"
+        onkeypress="gUserAgentsWindow.onWindowKeyPress(event);">
+
+  <script src="chrome://global/content/treeUtils.js"/>
+  <script src="chrome://browser/content/antidetect/useragents.js"/>
+
+  <prefpane id="useragentsPopupPane">
+    <preferences id="useragentPreferences" hidden="true" data-category="useragentsPopup">
+      <preference id="antidetect.useragent.string"
+                  name="antidetect.useragent.string"
+                  type="unichar"/>
+    </preferences>
+
+    <vbox flex="1" class="contentPane largeDialogContainer">
+      <separator class="thin"/>
+      <tree id="useragentsTree" flex="1" style="height: 10em;"
+            onselect="gUserAgentsWindow.onUserAgentSelected();"
+            hidecolumnpicker="true" seltype="single">
+        <treecols>
+          <treecol id="useragentCol" label="User Agent" flex="7" data-field-name="useragent"
+                   persist="width"/>
+        </treecols>
+        <treechildren id="useragentsChildren"/>
+      </tree>
+    </vbox>
+    <hbox align="end">
+      <hbox class="actionButtons" flex="1">
+        <spacer flex="1"/>
+      </hbox>
+    </hbox>
+  </prefpane>
+</window>

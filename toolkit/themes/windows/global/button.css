@@ -1,0 +1,118 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* ===== button.css =====================================================
+  == Styles used by the XUL button element.
+  ======================================================================= */
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/* :::::::::: button :::::::::: */
+
+button {
+  -moz-appearance: button;
+  margin: 1px 5px 2px 5px;
+  min-width: 6.3em;
+  color: ButtonText;
+  text-shadow: none;
+}
+
+.button-box {
+  border: 1px solid transparent;
+  padding-top: 1px;
+  padding-bottom: 2px;
+  padding-inline-start: 3px;
+  padding-inline-end: 4px;
+}
+
+.button-text {
+  margin: 0 !important;
+  text-align: center;
+}
+
+/* .......... focused state .......... */
+
+button:-moz-focusring > .button-box {
+  border: 1px dotted ThreeDDarkShadow;
+}
+
+/* .......... default state .......... */
+
+@media (-moz-windows-default-theme: 0) {
+  @media (-moz-windows-compositor) {
+    /* This is for high-contrast themes on Windows 8 and later */
+    button[default="true"],
+    button:hover {
+      color: HighlightText;
+    }
+  }
+}
+
+/* .......... active/open/checked state .......... */
+
+button:hover:active > .button-box:-moz-system-metric(windows-classic),
+button[open="true"] > .button-box:-moz-system-metric(windows-classic),
+button[checked="true"] > .button-box:-moz-system-metric(windows-classic) {
+  padding-top: 2px;
+  padding-bottom: 1px;
+  padding-inline-start: 4px;
+  padding-inline-end: 3px;
+}
+
+/* .......... disabled state .......... */
+
+button[disabled="true"] {
+  color: GrayText;
+}
+
+button[disabled="true"]:-moz-system-metric(windows-classic) {
+  color: ThreeDShadow;
+  text-shadow: 1px 1px ThreeDHighlight;
+}
+
+button[disabled="true"] > .button-box {
+  padding-top: 1px !important;
+  padding-bottom: 2px !important;
+  padding-inline-start: 3px !important;
+  padding-inline-end: 4px !important;
+}
+
+/* ::::: menu/menu-button buttons ::::: */
+
+button[type="menu-button"] {
+  margin: 0;
+}
+
+.button-menu-dropmarker,
+.button-menubutton-dropmarker {
+  -moz-appearance: none !important;
+  margin: 1px;
+  width: 11px;
+  height: 11px;
+}
+
+.button-menubutton-dropmarker[open="true"] {
+  margin-top: 2px;
+  margin-bottom: 0px;
+  margin-inline-start: 2px;
+  margin-inline-end: 0px;
+}
+
+/* ::::: plain buttons ::::: */
+
+button.plain {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+button[type="disclosure"] {
+  margin: 0;
+  -moz-appearance: none;
+  list-style-image: url("chrome://global/skin/tree/twisty.svg#clsd");
+  min-width: 0;
+}
+
+button[type="disclosure"][open="true"] {
+  list-style-image: url("chrome://global/skin/tree/twisty.svg#open");
+}

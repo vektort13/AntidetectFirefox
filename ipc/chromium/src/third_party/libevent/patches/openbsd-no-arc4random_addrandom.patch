@@ -1,0 +1,56 @@
+diff --git a/ipc/chromium/src/third_party/libevent/evutil_rand.c b/ipc/chromium/src/third_party/libevent/evutil_rand.c
+--- a/ipc/chromium/src/third_party/libevent/evutil_rand.c
++++ b/ipc/chromium/src/third_party/libevent/evutil_rand.c
+@@ -166,15 +166,16 @@ ev_arc4random_buf(void *buf, size_t n)
+ #endif /* } !_EVENT_HAVE_ARC4RANDOM */
+ 
+ void
+ evutil_secure_rng_get_bytes(void *buf, size_t n)
+ {
+ 	ev_arc4random_buf(buf, n);
+ }
+ 
++#if !defined(__OpenBSD__) && !defined(ANDROID)
+ void
+ evutil_secure_rng_add_bytes(const char *buf, size_t n)
+ {
+ 	arc4random_addrandom((unsigned char*)buf,
+ 	    n>(size_t)INT_MAX ? INT_MAX : (int)n);
+ }
+-
++#endif
+diff --git a/ipc/chromium/src/third_party/libevent/include/event2/util.h b/ipc/chromium/src/third_party/libevent/include/event2/util.h
+--- a/ipc/chromium/src/third_party/libevent/include/event2/util.h
++++ b/ipc/chromium/src/third_party/libevent/include/event2/util.h
+@@ -685,29 +685,31 @@ int evutil_secure_rng_init(void);
+  * (This string will _NOT_ be copied internally. Do not free it while any
+  * user of the secure RNG might be running. Don't pass anything other than a
+  * real /dev/...random device file here, or you might lose security.)
+  *
+  * This API is unstable, and might change in a future libevent version.
+  */
+ int evutil_secure_rng_set_urandom_device_file(char *fname);
+ 
++#if !defined(__OpenBSD__) && !defined(ANDROID)
+ /** Seed the random number generator with extra random bytes.
+ 
+     You should almost never need to call this function; it should be
+     sufficient to invoke evutil_secure_rng_init(), or let Libevent take
+     care of calling evutil_secure_rng_init() on its own.
+ 
+     If you call this function as a _replacement_ for the regular
+     entropy sources, then you need to be sure that your input
+     contains a fairly large amount of strong entropy.  Doing so is
+     notoriously hard: most people who try get it wrong.  Watch out!
+ 
+     @param dat a buffer full of a strong source of random numbers
+     @param datlen the number of bytes to read from datlen
+  */
+ void evutil_secure_rng_add_bytes(const char *dat, size_t datlen);
++#endif
+ 
+ #ifdef __cplusplus
+ }
+ #endif
+ 
+ #endif /* _EVUTIL_H_ */

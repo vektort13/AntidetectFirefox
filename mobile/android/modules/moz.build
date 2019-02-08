@@ -1,0 +1,41 @@
+# -*- Mode: python; indent-tabs-mode: nil; tab-width: 40 -*-
+# vim: set filetype=python:
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+EXTRA_JS_MODULES += [
+    'Accounts.jsm',
+    'AndroidLog.jsm',
+    'dbg-browser-actors.js',
+    'DelayedInit.jsm',
+    'DownloadNotifications.jsm',
+    'FxAccountsWebChannel.jsm',
+    'HelperApps.jsm',
+    'Home.jsm',
+    'HomeProvider.jsm',
+    'JavaAddonManager.jsm',
+    'JNI.jsm',
+    'LightweightThemeConsumer.jsm',
+    'MediaPlayerApp.jsm',
+    'Messaging.jsm',
+    'NetErrorHelper.jsm',
+    'Notifications.jsm',
+    'PageActions.jsm',
+    'Prompt.jsm',
+    'RuntimePermissions.jsm',
+    'Sanitizer.jsm',
+    'SharedPreferences.jsm',
+    'Snackbars.jsm',
+    'SSLExceptions.jsm',
+    'WebsiteMetadata.jsm'
+]
+
+# GeckoView-sepcific modules added separately.
+EXTRA_JS_MODULES += [
+    'GeckoViewContent.jsm',
+    'GeckoViewModule.jsm',
+    'GeckoViewNavigation.jsm',
+    'GeckoViewProgress.jsm',
+    'GeckoViewSettings.jsm',
+]

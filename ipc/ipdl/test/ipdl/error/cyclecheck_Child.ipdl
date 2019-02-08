@@ -1,0 +1,12 @@
+include protocol cyclecheck_Parent;
+include protocol cyclecheck_Grandchild;
+
+protocol cyclecheck_Child {
+    manager cyclecheck_Parent;
+    manages cyclecheck_Grandchild;
+
+child:
+    async cyclecheck_Grandchild();
+    async __delete__();
+};
+

@@ -1,0 +1,86 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+<script type="application/javascript"
+	src="chrome://browser/content/antidetect/in-content/useragent.js"/>
+
+<preferences id="useragentPreferences" hidden="true" data-category="paneUserAgent">
+	<preference id="antidetect.useragent.mode" name="antidetect.useragent.mode"
+		type="int"/>
+	<preference id="antidetect.useragent.browser" name="antidetect.useragent.browser"
+		type="unichar"/>
+	<preference id="antidetect.useragent.signature" name="antidetect.useragent.signature"
+		type="bool"/>
+
+	<preference id="general.useragent.override" name="general.useragent.override"
+		type="unichar"/>
+	<preference id="general.appversion.override" name="general.appversion.override"
+		type="unichar"/>
+	<preference id="general.buildID.override" name="general.buildID.override"
+		type="unichar"/>
+	<preference id="general.oscpu.override" name="general.oscpu.override"
+		type="unichar"/>
+</preferences>
+
+<hbox id="header-userAgent" class="header" hidden="true" data-category="paneUserAgent">
+	<label class="header-name" flex="1">UserAgent</label>
+</hbox>
+
+<groupbox id="uaGroup" data-category="paneUserAgent" hidden="true">
+	<caption><label>User Agent HTTP + JS</label></caption>
+
+	<html:table id="uaTable">
+		<html:tr>
+			<html:td class="content-cell">
+				<vbox id="useragentBox">
+					<hbox align="center">
+						<checkbox id="useragentEnable"
+							label="Включить подмену UserAgent"/>
+					</hbox>
+					<separator class="thin"/>
+				</vbox>
+			</html:td>
+		</html:tr>
+		<html:tr>
+			<html:td class="content-cell">
+				<vbox id="useragentRandomBox">
+					<hbox align="center">
+						<checkbox id="useragentRandomEnable"
+							disabled="true"
+							label="Случайные значения UserAgent"/>
+					</hbox>
+					<separator class="thin"/>
+				</vbox>
+			</html:td>
+		</html:tr>
+		<html:tr>
+			<html:td class="label-cell">
+				<label control="userAgent">User Agent:</label>
+				<menulist id="userAgent"
+					preference="antidetect.useragent.browser"
+					disabled="true"
+					onsynctopreference="return gUserAgentPane.onUserAgentSet();">
+					<menupopup>
+						<menuitem value="Chrome" label="Chrome"/>
+						<menuitem value="Firefox" label="Firefox"/>
+					</menupopup>
+				</menulist>
+			</html:td>
+		</html:tr>
+	</html:table>
+</groupbox>
+
+<groupbox id="signatureGroup" data-category="paneUserAgent" hidden="true">
+	<caption><label>Signature</label></caption>
+
+	<vbox id="signatureBox">
+		<hbox align="center">
+			<checkbox id="signatureEnable"
+				preference="antidetect.useragent.signature"
+				label="Включить подмену сигнатуры движка"
+				disabled="true"/>
+		</hbox>
+		<separator class="thin"/>
+	</vbox>
+</groupbox>

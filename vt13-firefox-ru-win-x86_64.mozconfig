@@ -1,0 +1,54 @@
+#
+. $topsrcdir/browser/config/mozconfig
+ac_add_options --disable-crashreporter
+ac_add_options --disable-libjpeg-turbo
+ac_add_options --disable-necko-wifi
+#ac_add_options --disable-strip
+ac_add_options --disable-tests
+#ac_add_options --disable-updater
+#ac_add_options --enable-default-toolkit=cairo-gtk3
+ac_add_options --enable-extensions=default
+ac_add_options --enable-release
+ac_add_options --enable-safe-browsing
+ac_add_options --enable-startup-notification
+ac_add_options --libdir="$LIBDIR"
+ac_add_options --prefix="$PREFIX"
+#ac_add_options --with-mozilla-api-keyfile=../mozilla-api-key
+ac_add_options --without-system-libvpx
+ac_add_options --with-pthreads
+ac_add_options --with-system-zlib
+#ac_add_options --enable-system-hunspell
+ac_add_options --with-system-jpeg
+#export BUILD_OFFICIAL=1
+#export CFLAGS="$CFLAGS -gdwarf-2"
+#export CXXFLAGS="$CXXFLAGS -gdwarf-2"
+#export MOZILLA_OFFICIAL=1
+
+##mk_add_options MOZ_CO_LOCALES=ru
+ac_add_options --enable-ui-locale=ru
+ac_add_options --with-l10n-base=@TOPSRCDIR@/../l10n-release
+
+#mk_add_options BUILD_OFFICIAL=1
+#mk_add_options MOZILLA_OFFICIAL=1
+mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/../objdirs/$(basename $topsrcdir)
+#ac_add_options --enable-official-branding
+#ac_add_options --enable-default-toolkit=cairo-gtk3
+#ac_add_options --disable-system-sqlite
+#ac_add_options --with-system-nspr
+#ac_add_options --with-system-nss
+ac_add_options --enable-startup-notification
+ac_add_options --enable-jemalloc
+ac_add_options --disable-debug
+ac_add_options --enable-optimize
+ac_add_options --with-intl-api
+
+ac_add_options --with-branding=browser/branding/vektor_t13
+ac_add_options --with-distribution-id=com.vektort13
+ac_add_options --target=x86_64-pc-mingw32
+ac_add_options --host=x86_64-pc-mingw32
+#ac_add_options --with-ccache=C:\\mozilla-build\\msys\\local\\bin\\ccache.exe
+mk_add_options MOZ_MAKE_FLAGS="-s -j10"
+mk_add_options WIN32_REDIST_DIR="C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\x64\Microsoft.VC140.CRT"
+export WIN32_REDIST_DIR="C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\x64\Microsoft.VC140.CRT"
+mk_add_options WIN_UCRT_REDIST_DIR="C:\Program Files (x86)\Windows Kits\10\Redist\ucrt\DLLs\x64"
+export WIN_UCRT_REDIST_DIR="C:\Program Files (x86)\Windows Kits\10\Redist\ucrt\DLLs\x64"

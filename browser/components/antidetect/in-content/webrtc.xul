@@ -1,0 +1,138 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+<script type="application/javascript"
+	src="chrome://browser/content/antidetect/in-content/webrtc.js"/>
+
+<preferences id="webrtcPreferences" hidden="true" data-category="paneWebRTC">
+	<preference id="antidetect.webrtc.ip.mode" name="antidetect.webrtc.ip.mode"
+		type="int"/>
+	<preference id="antidetect.webrtc.ip.local" name="antidetect.webrtc.ip.local"
+		type="unichar"/>
+	<preference id="antidetect.webrtc.ip.public" name="antidetect.webrtc.ip.public"
+		type="unichar"/>
+
+	<preference id="antidetect.webrtc.device.mode" name="antidetect.webrtc.device.mode"
+		type="int"/>
+	<preference id="antidetect.webrtc.device.deviceId" name="antidetect.webrtc.device.deviceId"
+		type="unichar"/>
+	<preference id="antidetect.webrtc.device.groupId" name="antidetect.webrtc.device.groupId"
+		type="unichar"/>
+	<preference id="antidetect.webrtc.device.kind" name="antidetect.webrtc.device.kind"
+		type="unichar"/>
+	<preference id="antidetect.webrtc.device.label" name="antidetect.webrtc.device.label"
+		type="unichar"/>
+</preferences>
+
+<hbox id="header-webRTC" class="header" hidden="true" data-category="paneWebRTC">
+	<label class="header-name" flex="1">WebRTC</label>
+</hbox>
+
+<groupbox id="peerconnectionGroup" data-category="paneWebRTC" hidden="true">
+	<caption><label>IP Address Detection</label></caption>
+
+	<vbox id="addressBox">
+		<hbox align="center">
+			<checkbox id="addressEnable"
+				label="Включить подмену Local и Public IP"/>
+		</hbox>
+		<separator class="thin"/>
+	</vbox>
+
+	<vbox id="addressRandomBox">
+		<hbox align="center">
+			<checkbox id="addressRandomEnable"
+				label="Случайные значения Local и Public IP"
+				disabled="true"/>
+		</hbox>
+		<separator class="thin"/>
+	</vbox>
+
+	<html:table id="ipTable">
+		<html:tr>
+			<html:td class="label-cell">
+				<label control="localIP">Local IP:</label>
+			</html:td>
+			<html:td class="content-cell">
+				<textbox id="localIP" class="padded uri-element content-cell-item"
+					placeholder="127.0.0.1"
+					preference="antidetect.webrtc.ip.local"
+					disabled="true"
+					onsynctopreference="return gWebRTCPane.saveLocalIP();"/>
+			</html:td>
+		</html:tr>
+		<html:tr>
+			<html:td class="label-cell">
+				<label control="publicIP">Public IP:</label>
+			</html:td>
+			<html:td class="content-cell">
+				<textbox id="publicIP" class="padded uri-element content-cell-item"
+					placeholder="8.8.8.8"
+					preference="antidetect.webrtc.ip.public"
+					disabled="true"
+					onsynctopreference="return gWebRTCPane.savePublicIP();"/>
+			</html:td>
+		</html:tr>
+	</html:table>
+</groupbox>
+
+<groupbox id="navigatorGroup" data-category="paneWebRTC" hidden="true">
+	<caption><label>WebRTC Media Devices</label></caption>
+
+	<vbox id="webrtcDeviceBox">
+		<hbox align="center">
+			<checkbox id="webrtcDeviceEnable"
+				label="Включить подмену данных"/>
+		</hbox>
+		<separator class="thin"/>
+	</vbox>
+
+	<vbox id="webrtcDeviceRandomBox">
+		<hbox align="center">
+			<checkbox id="webrtcDeviceRandomEnable"
+				label="Случайные значения данных"
+				disabled="true"/>
+		</hbox>
+		<separator class="thin"/>
+	</vbox>
+
+	<html:table id="deviceTable">
+		<html:tr>
+			<html:td class="label-cell">
+				<label control="deviceId">Device ID:</label>
+			</html:td>
+			<html:td class="content-cell">
+				<textbox id="deviceId" class="padded uri-element content-cell-item"
+					placeholder="deviceId" preference="antidetect.webrtc.device.deviceId"/>
+			</html:td>
+		</html:tr>
+		<html:tr>
+			<html:td class="label-cell">
+				<label control="groupId">Group ID:</label>
+			</html:td>
+			<html:td class="content-cell">
+				<textbox id="groupId" class="padded uri-element content-cell-item"
+					 placeholder="groupId" preference="antidetect.webrtc.device.groupId"/>
+			</html:td>
+		</html:tr>
+		<html:tr>
+			<html:td class="label-cell">
+				<label control="kind">Kind:</label>
+			</html:td>
+			<html:td class="content-cell">
+				<textbox id="kind" class="padded uri-element content-cell-item"
+					placeholder="kind" preference="antidetect.webrtc.device.kind"/>
+			</html:td>
+		</html:tr>
+		<html:tr>
+			<html:td class="label-cell">
+				<label control="label">Label:</label>
+			</html:td>
+			<html:td class="content-cell">
+				<textbox id="label" class="padded uri-element content-cell-item"
+					placeholder="label" preference="antidetect.webrtc.device.label"/>
+			</html:td>
+		</html:tr>
+	</html:table>
+</groupbox>

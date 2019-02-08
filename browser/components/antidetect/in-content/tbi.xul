@@ -1,0 +1,17 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+<script type="application/javascript"
+	src="chrome://browser/content/antidetect/in-content/tbi.js"/>
+
+<preferences id="tobeimplementedPreferences" hidden="true" data-category="paneToBeImplemented">
+</preferences>
+
+<hbox id="header-toBeImplemented" class="header" hidden="true" data-category="paneToBeImplemented">
+	<label class="header-name" flex="1">В процессе реализации</label>
+</hbox>
+
+<groupbox id="tbiGroup" data-category="paneToBeImplemented" hidden="true">
+	<label>Данный функционал находится в разработке. Новости о ходе разработки публикуются на официальном канале в Telegram @vschannel, последнюю версию программы вы можете скачать на <html:a target="_blank" href="https://vektort13.pro">официальном сайте.</html:a></label>
+</groupbox>

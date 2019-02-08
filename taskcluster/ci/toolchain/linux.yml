@@ -1,0 +1,132 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+linux64-clang/opt:
+    description: "Clang toolchain build"
+    treeherder:
+        kind: build
+        platform: toolchains/opt
+        symbol: TL(clang)
+        tier: 1
+    worker-type: aws-provisioner-v1/gecko-{level}-b-linux
+    worker:
+        implementation: docker-worker
+        docker-image: {in-tree: desktop-build}
+        max-run-time: 36000
+    run:
+        using: toolchain-script
+        script: build-clang-linux.sh
+        tooltool-downloads: public
+        resources:
+            - 'build/build-clang/**'
+
+linux64-clang-tidy/opt:
+    description: "Clang-tidy build"
+    index:
+        product: static-analysis
+        job-name: linux64-clang-tidy
+    treeherder:
+        kind: build
+        platform: toolchains/opt
+        symbol: TL(clang-tidy)
+        tier: 1
+    worker-type: aws-provisioner-v1/gecko-{level}-b-linux
+    worker:
+        implementation: docker-worker
+        docker-image: {in-tree: desktop-build}
+        max-run-time: 36000
+    run:
+        using: toolchain-script
+        script: build-clang-tidy-linux.sh
+        tooltool-downloads: public
+        resources:
+            - 'build/clang-plugin/**'
+            - 'build/build-clang/**'
+
+linux64-gcc/opt:
+    description: "GCC toolchain build"
+    treeherder:
+        kind: build
+        platform: toolchains/opt
+        symbol: TL(gcc)
+        tier: 1
+    worker-type: aws-provisioner-v1/gecko-{level}-b-linux
+    worker:
+        implementation: docker-worker
+        docker-image: {in-tree: desktop-build}
+        max-run-time: 36000
+    run:
+        using: toolchain-script
+        script: build-gcc-linux.sh
+        resources:
+            - 'build/unix/build-gcc/**'
+
+linux64-binutils/opt:
+    description: "Binutils toolchain build"
+    treeherder:
+        kind: build
+        platform: toolchains/opt
+        symbol: TL(binutil)
+        tier: 1
+    worker-type: aws-provisioner-v1/gecko-{level}-b-linux
+    worker:
+        implementation: docker-worker
+        docker-image: {in-tree: desktop-build}
+        max-run-time: 36000
+    run:
+        using: toolchain-script
+        script: build-binutils-linux.sh
+        resources:
+            - 'build/unix/build-binutils/**'
+
+linux64-cctools-port/opt:
+    description: "cctools-port toolchain build"
+    treeherder:
+        kind: build
+        platform: toolchains/opt
+        symbol: TL(cctools)
+        tier: 1
+    worker-type: aws-provisioner-v1/gecko-{level}-b-linux
+    worker:
+        implementation: docker-worker
+        docker-image: {in-tree: desktop-build}
+        max-run-time: 36000
+    run:
+        using: toolchain-script
+        script: build-cctools-port.sh
+
+linux64-hfsplus/opt:
+    description: "hfsplus toolchain build"
+    treeherder:
+        kind: build
+        platform: toolchains/opt
+        symbol: TL(hfs+)
+        tier: 1
+    worker-type: aws-provisioner-v1/gecko-{level}-b-linux
+    worker:
+        implementation: docker-worker
+        docker-image: {in-tree: desktop-build}
+        max-run-time: 36000
+    run:
+        using: toolchain-script
+        script: build-hfsplus-linux.sh
+        tooltool-downloads: public
+        resources:
+            - 'build/unix/build-hfsplus/**'
+
+linux64-libdmg/opt:
+    description: "libdmg-hfsplus toolchain build"
+    treeherder:
+        kind: build
+        platform: toolchains/opt
+        symbol: TL(libdmg-hfs+)
+        tier: 1
+    worker-type: aws-provisioner-v1/gecko-{level}-b-linux
+    worker:
+        implementation: docker-worker
+        docker-image: {in-tree: desktop-build}
+        max-run-time: 36000
+    run:
+        using: toolchain-script
+        script: build-libdmg-hfsplus.sh

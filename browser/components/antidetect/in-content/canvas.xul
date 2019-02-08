@@ -1,0 +1,52 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+<script type="application/javascript"
+	src="chrome://browser/content/antidetect/in-content/canvas.js"/>
+
+<preferences id="canvasPreferences" hidden="true" data-category="paneCanvas2d">
+	<preference id="antidetect.canvas2d.mode" name="antidetect.canvas2d.mode"
+		type="int"/>
+	<preference id="antidetect.canvas2d.seed" name="antidetect.canvas2d.seed"
+		type="int"/>
+</preferences>
+
+<hbox id="header-canvas2d" class="header" hidden="true" data-category="paneCanvas2d">
+	<label class="header-name" flex="1">Canvas</label>
+</hbox>
+
+<groupbox id="canvas2dGroup" data-category="paneCanvas2d" hidden="true">
+	<vbox id="canvasBox">
+		<hbox align="center">
+			<checkbox id="canvasEnable"
+				label="Включить подмену Canvas"/>
+		</hbox>
+		<separator class="thin"/>
+	</vbox>
+
+	<vbox id="canvasRandomBox">
+		<hbox align="center">
+			<checkbox id="canvasRandomEnable"
+				label="Случайные значения Canvas"
+				disabled="true"/>
+		</hbox>
+		<separator class="thin"/>
+	</vbox>
+
+	<html:table id="canvas2dTable">
+		<html:tr>
+			<html:td class="label-cell">
+				<label control="canvasRandomSeed">Постоянное значение
+					<html:br/>(от 1 до бесконечности):</label>
+			</html:td>
+			<html:td class="content-cell">
+				<textbox id="canvasRandomSeed"
+					type="number" min="0"
+					class="padded uri-element content-cell-item"
+					placeholder="12345678"
+					preference="antidetect.canvas2d.seed"/>
+			</html:td>
+		</html:tr>
+	</html:table>
+</groupbox>

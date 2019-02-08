@@ -1,0 +1,251 @@
+# Copyright (c) 2014 The WebRTC project authors. All Rights Reserved.
+#
+# Use of this source code is governed by a BSD-style license
+# that can be found in the LICENSE file in the root of the source
+# tree. An additional intellectual property rights grant can be found
+# in the file PATENTS.  All contributing project authors may
+# be found in the AUTHORS file in the root of the source tree.
+
+import("../../build/webrtc.gni")
+
+source_set("video_coding") {
+  sources = [
+    "codec_database.cc",
+    "codec_database.h",
+    "codec_timer.cc",
+    "codec_timer.h",
+    "content_metrics_processing.cc",
+    "content_metrics_processing.h",
+    "decoding_state.cc",
+    "decoding_state.h",
+    "encoded_frame.cc",
+    "encoded_frame.h",
+    "fec_tables_xor.h",
+    "frame_buffer.cc",
+    "frame_buffer.h",
+    "generic_decoder.cc",
+    "generic_decoder.h",
+    "generic_encoder.cc",
+    "generic_encoder.h",
+    "include/video_coding.h",
+    "include/video_coding_defines.h",
+    "inter_frame_delay.cc",
+    "inter_frame_delay.h",
+    "internal_defines.h",
+    "jitter_buffer.cc",
+    "jitter_buffer.h",
+    "jitter_buffer_common.h",
+    "jitter_estimator.cc",
+    "jitter_estimator.h",
+    "media_opt_util.cc",
+    "media_opt_util.h",
+    "media_optimization.cc",
+    "media_optimization.h",
+    "nack_fec_tables.h",
+    "packet.cc",
+    "packet.h",
+    "qm_select.cc",
+    "qm_select.h",
+    "qm_select_data.h",
+    "receiver.cc",
+    "receiver.h",
+    "rtt_filter.cc",
+    "rtt_filter.h",
+    "session_info.cc",
+    "session_info.h",
+    "timestamp_map.cc",
+    "timestamp_map.h",
+    "timing.cc",
+    "timing.h",
+    "video_coding_impl.cc",
+    "video_coding_impl.h",
+    "video_receiver.cc",
+    "video_sender.cc",
+  ]
+
+  configs += [ "../..:common_config" ]
+  public_configs = [ "../..:common_inherited_config" ]
+
+  if (is_win) {
+    cflags = [
+      # TODO(jschuh): Bug 1348: fix this warning.
+      "/wd4267",  # size_t to int truncation.
+    ]
+  }
+
+  if (is_clang) {
+    # Suppress warnings from Chrome's Clang plugins.
+    # See http://code.google.com/p/webrtc/issues/detail?id=163 for details.
+    configs -= [ "//build/config/clang:find_bad_constructs" ]
+  }
+
+  deps = [
+    ":video_coding_utility",
+    ":webrtc_h264",
+    ":webrtc_i420",
+    ":webrtc_vp8",
+    ":webrtc_vp9",
+    "../..:webrtc_common",
+    "../../common_video",
+    "../../system_wrappers",
+  ]
+}
+
+source_set("video_coding_utility") {
+  sources = [
+    "utility/frame_dropper.cc",
+    "utility/frame_dropper.h",
+    "utility/moving_average.h",
+    "utility/qp_parser.cc",
+    "utility/qp_parser.h",
+    "utility/quality_scaler.cc",
+    "utility/quality_scaler.h",
+    "utility/vp8_header_parser.cc",
+    "utility/vp8_header_parser.h",
+  ]
+
+  configs += [ "../..:common_config" ]
+  public_configs = [ "../..:common_inherited_config" ]
+
+  if (is_clang) {
+    # Suppress warnings from Chrome's Clang plugins.
+    # See http://code.google.com/p/webrtc/issues/detail?id=163 for details.
+    configs -= [ "//build/config/clang:find_bad_constructs" ]
+  }
+
+  deps = [
+    "../../system_wrappers",
+  ]
+}
+
+source_set("webrtc_h264") {
+  sources = [
+    "codecs/h264/h264.cc",
+    "codecs/h264/include/h264.h",
+  ]
+
+  configs += [ "../..:common_config" ]
+  public_configs = [ "../..:common_inherited_config" ]
+
+  if (is_clang) {
+    # Suppress warnings from Chrome's Clang plugins.
+    # See http://code.google.com/p/webrtc/issues/detail?id=163 for details.
+    configs -= [ "//build/config/clang:find_bad_constructs" ]
+  }
+
+  deps = [
+    "../../system_wrappers",
+  ]
+
+  if (use_third_party_h264) {
+    # Dependency added so that variables use_openh264 and ffmpeg_branding are
+    # recognized build arguments (avoid "Build argument has no effect" error).
+    # The variables and dependencies will be used for real as soon as
+    # https://codereview.webrtc.org/1306813009/ lands. In the meantime, the
+    # build arguments are to be used by waterfall/trybots.
+    deps += [
+      "//third_party/ffmpeg:ffmpeg",
+      "//third_party/openh264:encoder",
+    ]
+  }
+}
+
+# TODO(tkchin): Source set for webrtc_h264_video_toolbox. Currently not
+# possible to add, see https://crbug.com/297668.
+
+source_set("webrtc_i420") {
+  sources = [
+    "codecs/i420/i420.cc",
+    "codecs/i420/include/i420.h",
+  ]
+
+  configs += [ "../..:common_config" ]
+  public_configs = [ "../..:common_inherited_config" ]
+
+  if (is_clang) {
+    # Suppress warnings from Chrome's Clang plugins.
+    # See http://code.google.com/p/webrtc/issues/detail?id=163 for details.
+    configs -= [ "//build/config/clang:find_bad_constructs" ]
+  }
+
+  deps = [
+    "../../system_wrappers",
+  ]
+}
+
+source_set("webrtc_vp8") {
+  sources = [
+    "codecs/vp8/default_temporal_layers.cc",
+    "codecs/vp8/default_temporal_layers.h",
+    "codecs/vp8/include/vp8.h",
+    "codecs/vp8/include/vp8_common_types.h",
+    "codecs/vp8/realtime_temporal_layers.cc",
+    "codecs/vp8/reference_picture_selection.cc",
+    "codecs/vp8/reference_picture_selection.h",
+    "codecs/vp8/screenshare_layers.cc",
+    "codecs/vp8/screenshare_layers.h",
+    "codecs/vp8/simulcast_encoder_adapter.cc",
+    "codecs/vp8/simulcast_encoder_adapter.h",
+    "codecs/vp8/temporal_layers.h",
+    "codecs/vp8/vp8_factory.cc",
+    "codecs/vp8/vp8_factory.h",
+    "codecs/vp8/vp8_impl.cc",
+    "codecs/vp8/vp8_impl.h",
+  ]
+
+  configs += [ "../..:common_config" ]
+  public_configs = [ "../..:common_inherited_config" ]
+
+  if (is_clang) {
+    # Suppress warnings from Chrome's Clang plugins.
+    # See http://code.google.com/p/webrtc/issues/detail?id=163 for details.
+    configs -= [ "//build/config/clang:find_bad_constructs" ]
+  }
+
+  if (is_win) {
+    cflags = [
+      # TODO(jschuh): Bug 1348: fix this warning.
+      "/wd4267",  # size_t to int truncation.
+    ]
+  }
+
+  deps = [
+    ":video_coding_utility",
+    "../..:webrtc_common",
+    "../../common_video",
+    "../../system_wrappers",
+  ]
+  if (rtc_build_libvpx) {
+    deps += [ rtc_libvpx_dir ]
+  }
+}
+
+source_set("webrtc_vp9") {
+  sources = [
+    "codecs/vp9/include/vp9.h",
+    "codecs/vp9/screenshare_layers.cc",
+    "codecs/vp9/screenshare_layers.h",
+    "codecs/vp9/vp9_frame_buffer_pool.cc",
+    "codecs/vp9/vp9_frame_buffer_pool.h",
+    "codecs/vp9/vp9_impl.cc",
+    "codecs/vp9/vp9_impl.h",
+  ]
+
+  configs += [ "../..:common_config" ]
+  public_configs = [ "../..:common_inherited_config" ]
+
+  if (is_clang) {
+    # Suppress warnings from Chrome's Clang plugins.
+    # See http://code.google.com/p/webrtc/issues/detail?id=163 for details.
+    configs -= [ "//build/config/clang:find_bad_constructs" ]
+  }
+
+  deps = [
+    ":video_coding_utility",
+    "../../common_video",
+    "../../system_wrappers",
+  ]
+  if (rtc_build_libvpx) {
+    deps += [ rtc_libvpx_dir ]
+  }
+}

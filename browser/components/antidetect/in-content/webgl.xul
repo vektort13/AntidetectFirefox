@@ -1,0 +1,122 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+<script type="application/javascript"
+	src="chrome://browser/content/antidetect/in-content/webgl.js"/>
+
+<preferences id="webglPreferences" hidden="true" data-category="paneWebGL">
+	<preference id="antidetect.webgl.mode" name="antidetect.webgl.mode"
+		type="int"/>
+	<preference id="antidetect.webgl.override.vendor" name="antidetect.webgl.override.vendor"
+		type="unichar"/>
+	<preference id="antidetect.webgl.override.renderer" name="antidetect.webgl.override.renderer"
+		type="unichar"/>
+	<preference id="antidetect.webgl.imagehash" name="antidetect.webgl.imagehash"
+		type="bool"/>
+	<preference id="antidetect.webgl.imagehash.seed" name="antidetect.webgl.imagehash.seed"
+		type="int"/>
+</preferences>
+
+<hbox id="header-webGL" class="header" hidden="true" data-category="paneWebGL">
+	<label class="header-name" flex="1">WebGL</label>
+</hbox>
+
+<groupbox id="overrideGroup" data-category="paneWebGL" hidden="true">
+	<caption><label>WebGL Report Hash</label></caption>
+
+	<html:table id="glTable">
+		<html:tr>
+			<html:td class="content-cell">
+				<vbox id="reportHashBox">
+					<hbox align="center">
+						<checkbox id="reportHashEnable"
+							label="Включить подмену WebGL Report Hash"/>
+					</hbox>
+					<separator class="thin"/>
+				</vbox>
+			</html:td>
+		</html:tr>
+		<html:tr>
+			<html:td class="content-cell">
+				<vbox id="reportHashRandomBox">
+					<hbox align="center">
+						<checkbox id="reportHashRandomEnable"
+							disabled="true"
+							label="Случайные значения WebGL Report Hash"/>
+					</hbox>
+					<separator class="thin"/>
+				</vbox>
+			</html:td>
+		</html:tr>
+		<html:tr>
+			<html:td class="label-cell">
+				<label control="vendorString">Unmasked vendor:</label>
+			</html:td>
+			<html:td class="content-cell">
+				<textbox id="vendorString"
+					class="padded uri-element content-cell-item"
+					placeholder="Nvidia"
+					preference="antidetect.webgl.override.vendor"
+					disabled="true"/>
+			</html:td>
+		</html:tr>
+		<html:tr>
+			<html:td class="label-cell">
+				<label control="rendererString">Unmasked renderer:</label>
+			</html:td>
+			<html:td class="content-cell">
+				<textbox id="rendererString"
+					class="padded uri-element content-cell-item"
+					placeholder="GTX 1080 Ti"
+					preference="antidetect.webgl.override.renderer"
+					disabled="true"/>
+			</html:td>
+		</html:tr>
+		<html:tr>
+			<html:td class="content-cell">
+				<button id="showRendererTemplatesButton"
+					label="Выбрать из готового шаблона..."
+					disabled="true"/>
+			</html:td>
+		</html:tr>
+	</html:table>
+</groupbox>
+
+<groupbox id="imagehashGroup" data-category="paneWebGL" hidden="true">
+	<caption><label>WebGL Image Hash</label></caption>
+
+	<vbox id="imagehashBox">
+		<hbox align="center">
+			<checkbox id="imagehashEnable" preference="antidetect.webgl.imagehash"
+				label="Включить подмену WebGL Image Hash"/>
+		</hbox>
+		<separator class="thin"/>
+	</vbox>
+
+	<vbox id="imagehashRandomBox">
+		<hbox align="center">
+			<checkbox id="imagehashRandomEnable"
+				label="Случайные значения WebGL Image Hash"
+				disabled="true"/>
+		</hbox>
+		<separator class="thin"/>
+	</vbox>
+
+	<html:table id="imagehashTable">
+		<html:tr>
+			<html:td class="label-cell">
+				<label control="imagehashRandomSeed">Постоянное значение<html:br/>
+					(от 1 до бесконечности):</label>
+			</html:td>
+			<html:td class="content-cell">
+				<textbox id="imagehashRandomSeed"
+					type="number" min="0"
+					class="padded uri-element content-cell-item"
+					placeholder="12345678"
+					preference="antidetect.webgl.imagehash.seed"
+					disabled="true"/>
+			</html:td>
+		</html:tr>
+	</html:table>
+</groupbox>

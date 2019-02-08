@@ -1,0 +1,4 @@
+protocol Nullable {
+child:
+    async Msg(nullable int i);
+};

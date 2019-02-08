@@ -1,0 +1,44 @@
+%if 0
+/* - This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this file,
+   - You can obtain one at http://mozilla.org/MPL/2.0/. */
+%endif
+@namespace html "http://www.w3.org/1999/xhtml";
+
+.invalid {
+	border: 4px dashed red;
+}
+
+#category-webrtc > .category-icon {
+	list-style-image: url("chrome://browser/skin/antidetect/in-content/01.svg");
+}
+#category-canvas > .category-icon {
+	list-style-image: url("chrome://browser/skin/antidetect/in-content/02.svg");
+}
+#category-useragent > .category-icon {
+	list-style-image: url("chrome://browser/skin/antidetect/in-content/03.svg");
+}
+#category-webgl > .category-icon {
+	list-style-image: url("chrome://browser/skin/antidetect/in-content/04.svg");
+}
+#category-fonts > .category-icon {
+	list-style-image: url("chrome://browser/skin/antidetect/in-content/05.svg");
+}
+#category-audiocontext > .category-icon {
+	list-style-image: url("chrome://browser/skin/antidetect/in-content/06.svg");
+}
+#category-regional > .category-icon {
+	list-style-image: url("chrome://browser/skin/antidetect/in-content/07.svg");
+}
+#category-css > .category-icon {
+	list-style-image: url("chrome://browser/skin/antidetect/in-content/08.svg");
+}
+#category-hardware > .category-icon {
+	list-style-image: url("chrome://browser/skin/antidetect/in-content/09.svg");
+}
+#category-connection > .category-icon {
+	list-style-image: url("chrome://browser/skin/antidetect/in-content/10.svg");
+}
+#category-resources > .category-icon {
+	list-style-image: url("chrome://browser/skin/antidetect/in-content/11.svg");
+}

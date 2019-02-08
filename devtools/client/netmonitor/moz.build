@@ -1,0 +1,29 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+DIRS += [
+    'actions',
+    'components',
+    'har',
+    'middleware',
+    'reducers',
+    'selectors',
+    'shared',
+    'utils',
+]
+
+DevToolsModules(
+    'constants.js',
+    'netmonitor-controller.js',
+    'panel.js',
+    'request-list-context-menu.js',
+    'request-list-tooltip.js',
+    'store.js',
+    'waterfall-background.js',
+)
+
+BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+
+with Files('**'):
+    BUG_COMPONENT = ('Firefox', 'Developer Tools: Netmonitor')

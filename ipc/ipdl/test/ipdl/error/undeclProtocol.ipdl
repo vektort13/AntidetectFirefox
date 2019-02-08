@@ -1,0 +1,6 @@
+protocol undeclProtocol {
+    manages undeclared;
+
+child:
+    async undeclared();
+};

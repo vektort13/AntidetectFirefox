@@ -1,0 +1,21 @@
+<!doctype html>
+<meta charset=utf-8>
+<script type="application/javascript" src="../testharness.js"></script>
+<script type="application/javascript" src="../testharnessreport.js"></script>
+<div id="log"></div>
+<script>
+'use strict';
+setup({explicit_done: true});
+SpecialPowers.pushPrefEnv(
+  { "set": [["dom.requestIdleCallback.enabled", true],
+            ["general.useragent.locale", "en-US"],
+            // Need to set devPixelsPerPx explicitly to gain
+            // consistent pixel values in warning messages
+            // regardless of platform DPIs.
+            ["layout.css.devPixelsPerPx", 1]]},
+  function() {
+    // Open a new window after enabling requestIdleCallback so that we can
+    // use the function in the new window.
+    window.open("file_animation_performance_warning.html");
+  });
+</script>

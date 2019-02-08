@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://browser/skin/preferences/preferences.css" type="text/css"?>
+
+<window id="RenderersDialog" windowtype="Browser:Renderers"
+        class="windowDialog" title="Renderer templates"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        style="width: 400;"
+        onload="gRenderersWindow.onLoad();"
+        onunload="gRenderersWindow.uninit();"
+        persist="screenX screenY width height"
+        onkeypress="gRenderersWindow.onWindowKeyPress(event);">
+
+  <script src="chrome://global/content/treeUtils.js"/>
+  <script src="chrome://browser/content/antidetect/renderers.js"/>
+
+  <prefpane id="renderersPopupPane">
+    <preferences id="webglPreferences" hidden="true" data-category="renderersPopup">
+
+      <preference id="antidetect.webgl.override.vendor"
+                  name="antidetect.webgl.override.vendor"
+                  type="unichar"/>
+      <preference id="antidetect.webgl.override.renderer"
+                  name="antidetect.webgl.override.renderer"
+                  type="unichar"/>
+
+    </preferences>
+
+    <vbox flex="1" class="contentPane largeDialogContainer">
+      <separator class="thin"/>
+      <tree id="renderersTree" flex="1" style="height: 10em;"
+            onselect="gRenderersWindow.onRendererSelected();"
+            hidecolumnpicker="true" seltype="single">
+        <treecols>
+          <treecol id="vendorCol" label="Vendor" flex="2" data-field-name="vendor"
+                   persist="width"/>
+          <splitter class="tree-splitter"/>
+          <treecol id="rendererCol" label="Renderer" flex="5" data-field-name="renderer"
+                   persist="width"/>
+        </treecols>
+        <treechildren id="renderersChildren"/>
+      </tree>
+    </vbox>
+    <hbox align="end">
+      <hbox class="actionButtons" flex="1">
+        <spacer flex="1"/>
+      </hbox>
+    </hbox>
+  </prefpane>
+</window>

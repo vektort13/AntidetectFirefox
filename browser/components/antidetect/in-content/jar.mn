@@ -1,0 +1,16 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+browser.jar:
+   content/browser/antidetect/in-content/antidetect.js
+*  content/browser/antidetect/in-content/antidetect.xul
+
+   content/browser/antidetect/in-content/webrtc.js
+   content/browser/antidetect/in-content/canvas.js
+   content/browser/antidetect/in-content/webgl.js
+   content/browser/antidetect/in-content/audiocontext.js
+   content/browser/antidetect/in-content/useragent.js
+   content/browser/antidetect/in-content/resources.js
+   content/browser/antidetect/in-content/tbi.js
+

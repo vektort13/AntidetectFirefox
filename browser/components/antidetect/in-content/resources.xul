@@ -1,0 +1,29 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+<script type="application/javascript"
+	src="chrome://browser/content/antidetect/in-content/resources.js"/>
+
+<preferences id="resourcesPreferences" hidden="true" data-category="paneResources">
+	<preference id="antidetect.useragent.uriProtect" name="antidetect.useragent.uriProtect"
+		type="bool"/>
+</preferences>
+
+<hbox id="header-resources"
+	class="header"
+	hidden="true"
+	data-category="paneResources">
+	<label class="header-name" flex="1">Resources</label>
+</hbox>
+
+<groupbox id="resourcesGroup" data-category="paneResources" hidden="true">
+	<vbox id="resourcesBox">
+		<hbox align="center">
+			<checkbox id="resourcesEnable"
+				preference="antidetect.useragent.uriProtect"
+				label="Включить блокировку специальных URI"/>
+		</hbox>
+		<separator class="thin"/>
+	</vbox>
+</groupbox>
