@@ -1,4 +1,5 @@
-# Antidetect Firefox - Firefox-based Antidetect browser
+# AntidetectFirefox
+Source code of Firefox-based Antidetect browser
 
 Browser is able to substitute the following identifiers:
 
@@ -10,3 +11,4 @@ Browser is able to substitute the following identifiers:
 * CSS Media Fingerprint
 * Geolocation
 * Do-not-track flag
+
